@@ -25,7 +25,15 @@ export default class {
   }
   
   changePassword = v => {
-    
+    this.changeAuth({
+      ...this.auth,
+      password: v
+    });
+  }
+
+  login = () => {
+    localStorage.setItem("sessionID", "ASDRFEFD")
+    console.log(localStorage.getItem("sessionID"))
   }
 
 }
