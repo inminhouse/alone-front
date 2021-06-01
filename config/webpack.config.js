@@ -2,23 +2,67 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+// const nodeExternals = require('webpack-node-externals');
+// const LoadablePlugin = require('@loadable/webpack-plugin');
+//config
+const devConfig = require('../config/webpack.dev')
+const prodConfig = require('../config/webpack.prod')
+
+const DEV = "development";
+const PROD = "production";
+
 module.exports = env => {
+
+
+  const getEntry = env => {
+
+    const entryPoint = [
+      // path.resolve(__dirname, '../src/index.js'),
+      path.resolve(__dirname, '../src'),
+    ];
+
+    if(env.NODE_ENV === DEV){
+      // entryPoint.push('webpack-hot-middleware/client?name=web&path=/__webpack_hmr&timeout=20000&reload=true');
+    }
+
+    return entryPoint;
+  }
+
+  const babelPlugins = [
+    "@babel/plugin-proposal-async-generator-functions",
+    //@babel/plugin-proposal-decorators 이후 @babel/plugin-proposal-class-properties 순서
+    ["@babel/plugin-proposal-decorators", {"legacy": true}],
+    ["@babel/plugin-proposal-class-properties", {"loose": true}],
+    "@babel/plugin-proposal-json-strings",
+    "@babel/plugin-proposal-optional-chaining",
+    "@babel/plugin-syntax-async-generators",
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-syntax-import-meta",
+    "@babel/plugin-transform-arrow-functions",
+    "@babel/plugin-transform-async-to-generator",
+    "@babel/plugin-transform-react-constant-elements",
+    "@babel/plugin-transform-runtime",
+  ];
+
+  if(env.NODE_ENV === DEV){
+    // appEntry.push('react-hot-loader/patch');
+    // babelPlugins.push('react-hot-loader/babel');
+  }
+  
   return {
+    ...(env.NODE_ENV === DEV ? devConfig : prodConfig),
     mode: env.NODE_ENV,
     entry: {
-      app: [
-        path.resolve(__dirname, '../src/index.js'),
-      ],
+      app: getEntry(env),
       vendor: [
         'semantic-ui-react',
-      //   // 'semantic-ui-css',
       ],
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
       publicPath: '/',
-      filename: 'dist/[name].[contenthash].js',
-      chunkFilename: 'dist/[name].[contenthash].js',
+      filename: '[name].[chunkhash].js',
+      chunkFilename: '[name].[chunkhash].js',
     },
     resolve: {
       modules: [
@@ -47,24 +91,10 @@ module.exports = env => {
                   modules: false,
                 }
               ],
-              "@babel/preset-react",
+              '@babel/preset-react',
+              // 'next/babel',
             ],
-            plugins: [
-              "@babel/plugin-proposal-async-generator-functions",
-              //@babel/plugin-proposal-decorators 이후 @babel/plugin-proposal-class-properties 순서
-              ["@babel/plugin-proposal-decorators", {"legacy": true}],
-              ["@babel/plugin-proposal-class-properties", {"loose": true}],
-              "@babel/plugin-proposal-json-strings",
-              "@babel/plugin-proposal-optional-chaining",
-              "@babel/plugin-syntax-async-generators",
-              "@babel/plugin-syntax-dynamic-import",
-              "@babel/plugin-syntax-import-meta",
-              "@babel/plugin-transform-arrow-functions",
-              "@babel/plugin-transform-async-to-generator",
-              "@babel/plugin-transform-react-constant-elements",
-              "@babel/plugin-transform-runtime",
-              "react-hot-loader/babel",
-            ]
+            plugins: babelPlugins
           },
         },
         {
@@ -99,16 +129,17 @@ module.exports = env => {
     },
 
     plugins: [
+      // new LoadablePlugin(),
+      // new webpack.HotModuleReplacementPlugin(), 
       new HtmlWebpackPlugin({
         title: 'Alone',
         filename: 'index.html',
-        template:"./public/index.html",
-        favicon: './public/favicon.ico',
-        // inject: true
+        template:"public/index.html",
+        favicon: 'public/favicon.ico',
       }),
-      new webpack.HotModuleReplacementPlugin(),
     ],
-    
+
+    // externals: ['@loadable/component', nodeExternals()]
     // optimization: {
     //   splitChunks: {
     //     minSize: {

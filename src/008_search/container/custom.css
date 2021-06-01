@@ -1,0 +1,70 @@
+/* custom label */
+/* .ui.vertical.menu .item>.label.custom {
+  padding: 0;
+  margin: 0;
+} */
+
+/* custom icon */
+.ui.vertical.menu .item>i.icon.corner {
+  margin: 0;
+}
+
+i.icon.left.top.corner {
+  position: absolute; top: 0; left: 0;
+}
+
+i.icon.right.bottom.corner {
+  position: absolute; right: 0; bottom: 0;
+  margin-bottom: 1em; margin-right: 0.8em;
+}
+
+
+/* left.corner */
+/* .ui.vertical.menu .item>.i.icon.left.top.corner {
+  position: 'absolute'; top: 0; left: 0; margin: 0
+}
+
+
+.ui.vertical.menu .item>.left.corner.label.custom {
+  top: 0;
+  left: 0;
+  text-align: left;
+}
+
+.ui.left.corner.label .icon.custom {
+  padding: 2px;
+  top: 0;
+  left: 0;
+  color: darkorange;
+}
+
+.ui.left.corner.label.custom::after {
+  border-bottom: 0em solid transparent;
+  border-top: 0em solid transparent;
+  border-left: 0em solid transparent;
+  border-right: 0em solid transparent;
+  border-top-color: unset;
+} */
+
+/* right.bottom.corner */
+/* .ui.vertical.menu .item>.right.bottom.corner.label.custom {
+  top: unset;
+  bottom: 0;
+}
+
+.ui.right.corner.label.custom::after {
+  border-bottom: 0em solid transparent;
+  border-top: 0em solid transparent;
+  border-left: 0em solid transparent;
+  border-right: 0em solid transparent;
+  border-right-color: unset;
+}
+
+.ui.right.bottom.corner.label .icon.custom {
+  position: absolute;
+  top: unset;
+  left: unset;
+  bottom: 0;
+  padding-bottom: 3ex;
+  color: silver;
+} */

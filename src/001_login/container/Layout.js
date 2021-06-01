@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import { inject, observer } from 'mobx-react';
 
@@ -9,10 +9,26 @@ import { view } from '@/000_shared';
 
 @inject('loginStore')
 @observer
+@withRouter
 export default class extends Component {
+
+  // constructor(props) {
+  //   super(props);
+  //   console.log(props);
+  // }
+
+  login = async () => {
+    await this.props.loginStore.login();
+    console.log(this.props.history);
+    this.props.history.push('/');
+  }
+
   render() {
 
     const {auth} = this.props.loginStore;
+    const {
+      login,
+    } = this.props.loginStore;
     
     // console.log(auth, view);
     return (
@@ -42,7 +58,12 @@ export default class extends Component {
               />
             </view.IconElements>
             <br/>
-            <Button color='teal' fluid size='large'>
+            <Button 
+              fluid 
+              color='teal' 
+              size='large'
+              onClick = {this.login}
+            >
               Login
             </Button>
           </Segment>

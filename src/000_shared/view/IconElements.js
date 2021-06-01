@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //ui
 import { Grid, Icon, } from 'semantic-ui-react'
 
-export default class Layout extends Component {
+export default class extends Component {
 
   render() {
 
