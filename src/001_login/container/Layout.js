@@ -3,6 +3,9 @@ import { Link, withRouter } from 'react-router-dom';
 
 import { inject, observer } from 'mobx-react';
 
+
+// import google from 'googleapis';
+
 //ui
 import { Button, Grid, Input, Header, Image, Message, Segment } from 'semantic-ui-react';
 import { view } from '@/000_shared';
@@ -20,7 +23,27 @@ export default class extends Component {
   login = async () => {
     await this.props.loginStore.login();
     console.log(this.props.history);
-    this.props.history.push('/');
+    // this.props.history.push('/');
+    // const {google} = require('googleapis');
+    // const oauth2Client = new google.auth.OAuth2(
+    //   "249234000259-b3s54mj0sfmeesulgr4rlok9c8dce81i.apps.googleusercontent.com",
+    //   "-CvspwINwfAY24t7K7YTwAML",
+    //   "http://localhost:3333"
+    // );
+
+    // const scopes = [
+    //   "https://www.googleapis.com/auth/poeple",
+    //   'https://www.googleapis.com/auth/calendar'
+    // ];
+
+    // const url = oauth2Client.generateAuthUrl({
+    //   // 'online' (default) or 'offline' (gets refresh_token)
+    //   access_type: 'offline',
+    
+    //   // If you only need one scope you can pass it as a string
+    //   scope: scopes
+    // });
+
   }
 
   render() {
@@ -58,6 +81,10 @@ export default class extends Component {
               />
             </view.IconElements>
             <br/>
+            {/* <Segment>
+            <div className="g-signin2" data-onsuccess="onSignIn"></div>
+
+            </Segment> */}
             <Button 
               fluid 
               color='teal' 

@@ -2,11 +2,10 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// const nodeExternals = require('webpack-node-externals');
-// const LoadablePlugin = require('@loadable/webpack-plugin');
 //config
 const devConfig = require('../config/webpack.dev')
 const prodConfig = require('../config/webpack.prod')
+
 
 const DEV = "development";
 const PROD = "production";
@@ -92,7 +91,6 @@ module.exports = env => {
                 }
               ],
               '@babel/preset-react',
-              // 'next/babel',
             ],
             plugins: babelPlugins
           },
@@ -129,7 +127,6 @@ module.exports = env => {
     },
 
     plugins: [
-      // new LoadablePlugin(),
       // new webpack.HotModuleReplacementPlugin(), 
       new HtmlWebpackPlugin({
         title: 'Alone',

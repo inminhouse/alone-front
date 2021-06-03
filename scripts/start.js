@@ -14,7 +14,7 @@ const WebpackDevServer = require('webpack-dev-server');
 
 const express = require('express');
 // const next = require('next');//ssr 프레임워크
-const morgan = require('morgan');//로그 기록 미들웨어
+// const morgan = require('morgan');//로그 기록 미들웨어
 
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
