@@ -8,49 +8,63 @@ export default class {
 
   @observable
   _schedule = {};
-  // @observable
-  // _topImageList = [];
-  // @observable
-  // _homeStruct = [];
-  // @observable
-  // _activeIdx = 0;
+  @observable
+  _scheduleList = [];
 
   @computed
   get schedule() {
     return toJS(this._schedule);
   }
-  // @computed
-  // get topImageList() {
-  //   return toJS(this._topImageList);
-  // }
-  // @computed
-  // get homeStruct() {
-  //   return toJS(this._homeStruct);
-  // }
-  // @computed
-  // get activeIdx() {
-  //   return this._activeIdx;
-  // }
+  @computed
+  get scheduleList() {
+    return toJS(this._scheduleList);
+  }
 
   @action
   setSchedule = v => this._schedule = v;
+  @action
+  setScheduleList = v => this._scheduleList = v;
 
-  // @action
-  // setTopImageList = v => this._topImageList = v;
-  // @action
-  // setHomeStruct = v => this._homeStruct = v;
-  // @action
-  // setActiveIdx = v => {
-  //   if(v < 0 || v > this.topImageList.length - 1) {
-  //     return 
-  //   }
-  //   this._activeIdx = v;
-  // }
+  findScheduleList = () => {
+    this.setScheduleList([
+      {
+        img: 'https://react.semantic-ui.com/images/avatar/small/helen.jpg',
+        title: '서울 종로투어',
+        startDate: '2021-07-11',
+        endDate: '2021-07-21',
+        destination: [
+          '서울특별시 중구 동대문시장', 
+          '서울특별시 종로구 삼청동 갤러리현대',
+        ]
+      },
+      {
+        img: 'https://react.semantic-ui.com/images/avatar/small/helen.jpg',
+        title: '서울 종로투어',
+        startDate: '2021-07-11',
+        endDate: '2021-07-21',
+        destination: [
+          '서울특별시 중구 동대문시장', 
+          '서울특별시 종로구 삼청동 갤러리현대',
+        ]
+      },
+    ])
+  }
 
-  changeDestination = v => {
+  addDestination = () => {
+    const destination = this.schedule.destination ? this.schedule.destination : [''];
+    destination.push('');
     this.setSchedule({
       ...this.schedule,
-      destination: v
+      destination: destination
+    });
+  }
+
+  changeDestination = (v, idx) => {
+    const destination = this.schedule.destination ? this.schedule.destination : [''];
+    destination[idx] = v;
+    this.setSchedule({
+      ...this.schedule,
+      destination: destination
     });
   }
 
@@ -78,25 +92,5 @@ export default class {
 
 
 
-
-
-  changeEmail = v => {
-    this.changeAuth({
-      ...this.auth,
-      email: v
-    });
-  }
-  
-  changePassword = v => {
-    this.changeAuth({
-      ...this.auth,
-      password: v
-    });
-  }
-
-  login = () => {
-    localStorage.setItem("sessionID", "ASDRFEFD")
-    console.log(localStorage.getItem("sessionID"))
-  }
 
 }

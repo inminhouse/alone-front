@@ -7,12 +7,14 @@ import {
   Container,
   Divider,
   Image,
+  Button,
   Header,
+  List,
   Menu,
   Icon,
   Popup,
   Segment,
-} from 'semantic-ui-react'
+} from 'semantic-ui-react';
 
 import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom';
 
@@ -23,6 +25,8 @@ import Search from '../../008_search';
 import Mypage from '../../009_mypage';
 
 
+import ScheduleList from '../view/ScheduleList';
+import ScheduleRegister from '../view/ScheduleRegister';
 import Bottom from '../view/Bottom';
 import { view } from '@/000_shared';
 
@@ -41,19 +45,23 @@ export default class extends Component {
 
   componentDidMount() {
     // console.log(this.props);
+    this.props.mainStore.findScheduleList();
   }
 
   render() {
 
-    const { match, history } = this.props;
+    // const { match, history } = this.props;
     const { activeUrl } = this.state;
 
     const {
       schedule,
-      changeDestination,
+      scheduleList,
       changeStart,
       changeEnd,
       addSchedule,
+      saerchPartner,
+      addDestination,
+      changeDestination,
     } = this.props.mainStore;
     
     return (
@@ -100,14 +108,26 @@ export default class extends Component {
               }
             >
               <Popup.Content>
-                <view.PartnerSearchForm 
-                  vertical 
-                  inline={true}
+                <ScheduleRegister 
                   schedule={schedule}
+                  addDestination={addDestination}
                   changeDestination={changeDestination}
-                  changeStart={changeStart}
-                  changeEnd={changeEnd}
-                  addSchedule={addSchedule}
+                />
+              </Popup.Content>
+            </Popup>
+            
+            <Popup
+              on='click'
+              trigger={
+                <Menu.Item as='a' >
+                  <Icon name='list ul' style={{margin: 0}}/>  
+                </Menu.Item>
+              }
+            >
+              <Popup.Content>
+                <ScheduleList
+                  list={scheduleList}
+                  saerchPartner={saerchPartner}
                 />
               </Popup.Content>
             </Popup>
