@@ -90,7 +90,7 @@ export default class {
       {
         chatId: '000103',
         chatImg: 'https://react.semantic-ui.com/images/wireframe/square-image.png',
-        chatName: '이민상',
+        chatName: '훈이',
         recentMsg: {
           msg: 'Hi!',
           time: '2021-05-22 11:10:50'

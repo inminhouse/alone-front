@@ -26,30 +26,12 @@ export default class extends Component {
     super(props);
     console.log(window.outerHeight, window.innerHeight, window.outerWidth, window.innerWidth);
 
-    // this.state = {
-    //   menuWidth: this.setMenuWidth(window.innerWidth),
-    // }
-
-    // window.addEventListener('resize', () => {
-    //   this.setState({ menuWidth : this.setMenuWidth(window.innerWidth) })
-    //   this.setMainWidth();
-    // })
   }
 
   componentDidMount() {
 
-    // this.props.searchStore.findChatList();
-
-    // this.props.searchStore.findChatHome();
-
-    // this.setMainWidth();
+    this.props.searchStore.findScheduleChatList();
   }
-
-  // setMenuWidth = innerWidth => innerWidth > 1000 ? 300 : '8em';
-
-  // setMainWidth = () => this.setState(
-  //   { mainWidth: document.getElementById('main').clientWidth - document.getElementById('menu').clientWidth }
-  // );
   
   saerchPartner = e => {
     console.log(e);
@@ -57,22 +39,40 @@ export default class extends Component {
     // this.props.history.push('/search');
   }
 
+  createScheduleChatList = l => l.map((x, idx) => {
+    const column = {mobile: 16, tablet: 8, computer: 4};
+    return (
+      <Grid.Column {...column} key={idx}>
+        <Card>
+          <div className="ui image" style={{height: 250}}>
+            <img 
+              src={x.chatImg}
+              style={{
+                height: '100%',
+                objectFit: 'cover'
+              }}
+            />
+          </div>
+          <Card.Content>
+            <Card.Header>{x.name}</Card.Header>
+            <Card.Meta>{x.startDate + ' ~ ' + x.endDate}</Card.Meta>
+            <Card.Description>{x.introduce}</Card.Description>
+          </Card.Content>
+          <Card.Content extra>
+            <a>
+              <Icon name='user' />
+              {x.participant + 'Friends'}
+            </a>
+          </Card.Content>
+        </Card>
+      </Grid.Column>
+    )
+  })
+
   render() {
     // const { menuWidth, mainWidth } = this.state
-    const { 
-      chatList,
-      searchChat,
-      chatHome,
-      chatInfo,
-      msgList,
-      msg,
-
-
-      findChat,
-      sendMsg,
-      
-      setSearchChat,
-      setMsg,
+    const {
+      scheduleChatList,
     } = this.props.searchStore;
     
     const {
@@ -83,7 +83,7 @@ export default class extends Component {
       addSchedule,
     } = this.props.homeStore;
 
-    console.log(msg);
+    // console.log(msg);
     // console.log('이민상\n이민상');
     return (
       <Container id="main" style={{padding: '6em 0 2em 0'}}>
@@ -102,205 +102,10 @@ export default class extends Component {
           </div>
           <Divider />
           <Grid>
-            <Grid.Column mobile={16} tablet={8} computer={4}>
-              <Card>
-                <div className="ui image" style={{height: 250}}>
-                  <img 
-                    src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb0jRCKpogcPjhf4qwBPAcKsQAzkniCK6nsA&usqp=CAU' 
-                    style={{
-                      height: '100%',
-                      objectFit: 'cover'
-                    }}
-                  />
-                </div>
-                {/* <Image as="div" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb0jRCKpogcPjhf4qwBPAcKsQAzkniCK6nsA&usqp=CAU' wrapped /> */}
-                <Card.Content>
-                  <Card.Header>Daniel</Card.Header>
-                  <Card.Meta>Joined in 2016</Card.Meta>
-                  <Card.Description>
-                    Daniel is a comedian living in Nashville.
-                  </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                  <a>
-                    <Icon name='user' />
-                    10 Friends
-                  </a>
-                </Card.Content>
-              </Card>
-            </Grid.Column>
-            
-            <Grid.Column mobile={16} tablet={8} computer={4}>
-              <Card>
-                
-                <div className="ui image" style={{height: 250}}>
-                  <img 
-                    src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHJORRbg4qlStrFWR1kBJKF7e1xjFQGP9AjQ&usqp=CAU' 
-                    style={{
-                      height: '100%',
-                      objectFit: 'cover'
-                    }}
-                  />
-                </div>
-                <Card.Content>
-                  <Card.Header>Daniel</Card.Header>
-                  <Card.Meta>Joined in 2016</Card.Meta>
-                  <Card.Description>
-                    Daniel is a comedian living in Nashville.
-                  </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                  <a>
-                    <Icon name='user' />
-                    10 Friends
-                  </a>
-                </Card.Content>
-              </Card>
-            </Grid.Column>
-            
-            <Grid.Column mobile={16} tablet={8} computer={4}>
-              <Card>
-                <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' wrapped ui={false} />
-                <Card.Content>
-                  <Card.Header>Daniel</Card.Header>
-                  <Card.Meta>Joined in 2016</Card.Meta>
-                  <Card.Description>
-                    Daniel is a comedian living in Nashville.
-                  </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                  <a>
-                    <Icon name='user' />
-                    10 Friends
-                  </a>
-                </Card.Content>
-              </Card>
-            </Grid.Column>
-            
-            <Grid.Column mobile={16} tablet={8} computer={4}>
-              <Card>
-                <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' wrapped ui={false} />
-                <Card.Content>
-                  <Card.Header>Daniel</Card.Header>
-                  <Card.Meta>Joined in 2016</Card.Meta>
-                  <Card.Description>
-                    Daniel is a comedian living in Nashville.
-                  </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                  <a>
-                    <Icon name='user' />
-                    10 Friends
-                  </a>
-                </Card.Content>
-              </Card>
-            </Grid.Column>
-            
-            <Grid.Column mobile={16} tablet={8} computer={4}>
-              <Card>
-                <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' wrapped ui={false} />
-                <Card.Content>
-                  <Card.Header>Daniel</Card.Header>
-                  <Card.Meta>Joined in 2016</Card.Meta>
-                  <Card.Description>
-                    Daniel is a comedian living in Nashville.
-                  </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                  <a>
-                    <Icon name='user' />
-                    10 Friends
-                  </a>
-                </Card.Content>
-              </Card>
-            </Grid.Column>
-            
-            <Grid.Column mobile={16} tablet={8} computer={4}>
-              <Card>
-                <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' wrapped ui={false} />
-                <Card.Content>
-                  <Card.Header>Daniel</Card.Header>
-                  <Card.Meta>Joined in 2016</Card.Meta>
-                  <Card.Description>
-                    Daniel is a comedian living in Nashville.
-                  </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                  <a>
-                    <Icon name='user' />
-                    10 Friends
-                  </a>
-                </Card.Content>
-              </Card>
-            </Grid.Column>
-            
-            <Grid.Column mobile={16} tablet={8} computer={4}>
-              <Card>
-                <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' wrapped ui={false} />
-                <Card.Content>
-                  <Card.Header>Daniel</Card.Header>
-                  <Card.Meta>Joined in 2016</Card.Meta>
-                  <Card.Description>
-                    Daniel is a comedian living in Nashville.
-                  </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                  <a>
-                    <Icon name='user' />
-                    10 Friends
-                  </a>
-                </Card.Content>
-              </Card>
-            </Grid.Column>
+            {this.createScheduleChatList(scheduleChatList)}
           </Grid>
 
         </div>
-        {/* <Grid 
-          id="grid" 
-          columns={2} divided 
-        > */}
-          {/* <Grid.Column id="menu" style={{width: menuWidth}}>
-            <ChatList
-              chatList={chatList}
-              searchChat={searchChat}
-              activeId={chatInfo && chatInfo.chatId}
-              folding={menuWidth === 300}
-              changeSearchChat={setSearchChat}
-              findChat={findChat}
-            />
-          </Grid.Column> */}
-
-          {/* chating header */}
-          {/* <Grid.Column style={{width: mainWidth}}>
-            {chatInfo ? 
-              <ChatMsgView 
-                chatInfo={chatInfo}
-                msgList={msgList}
-                msg={msg}
-                setMsg={setMsg}
-                sendMsg={sendMsg}
-              /> :
-              chatHome ? 
-                <div 
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Header icon style={{margin: '1em'}}>
-                    <Icon name={chatHome.icon} />
-                    {chatHome.header}
-                  </Header>
-                  <Image src={chatHome.imgSrc}/>
-                  <Header sub style={{margin: '1em'}}>
-                    {chatHome.subHeader}
-                  </Header>
-                </div> :
-                <div />
-            }
-          </Grid.Column> */}
-        {/* </Grid> */}
       </Container>
     )
   }
