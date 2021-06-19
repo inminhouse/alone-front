@@ -89,11 +89,11 @@ export default class extends Component {
             }
             {x.chatName}
             
-            {x.status && x.status.length > 0 && x.status.filter(y => y !== 'bookmark').map(y => <i className={'grey ' + y + ' icon'} style={{marginLeft: 5}}/>)
-              // <i className="yellow star icon"/>
+            {x.status && x.status.length > 0 && 
+              x.status.filter(y => y !== 'bookmark').map(y => <i className={'grey ' + y + ' icon'} style={{marginLeft: 5}}/>)
             }
           </div>
-          <div>
+          <div style={{marginTop: '2px'}}>
             {x.recentMsg.msg}
           </div>
         </div>

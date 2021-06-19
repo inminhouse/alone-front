@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 
 import { inject, observer } from 'mobx-react';
 
-
+import axios from 'axios';
 // import google from 'googleapis';
 
 //ui
@@ -21,9 +21,15 @@ export default class extends Component {
   // }
 
   login = async () => {
-    await this.props.loginStore.login();
-    console.log(this.props.history);
-    // this.props.history.push('/');
+    
+    // axios.get('/api/oauth2/authorization/google')
+    // axios.get('/api/auth/login')
+      // .then(({data}) => console.log(data));
+
+    // await this.props.loginStore.login();
+    // console.log(this.props.history);
+    // window.open("/api/oauth2/authorization/google")
+    this.props.history.push('http://localhost:8080/oauth2/authorization/google');
     // const {google} = require('googleapis');
     // const oauth2Client = new google.auth.OAuth2(
     //   "249234000259-b3s54mj0sfmeesulgr4rlok9c8dce81i.apps.googleusercontent.com",

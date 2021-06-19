@@ -7,6 +7,10 @@ export default class {
   }
   
   @observable
+  _scheduleChatList = [];
+
+
+  @observable
   _chatList = [];
   @observable
   _searchChat = '';
@@ -18,6 +22,12 @@ export default class {
   _msgList = [];
   @observable
   _msg = '';
+
+  @computed
+  get scheduleChatList() {
+    return toJS(this._scheduleChatList);
+  }
+
 
   @computed
   get chatList() {
@@ -45,6 +55,9 @@ export default class {
   }
 
   @action
+  setScheduleChatList = v => this._scheduleChatList = v;
+
+  @action
   setChatList = v => this._chatList = v;
   @action
   setSearchChat = v => this._searchChat = v;
@@ -57,6 +70,51 @@ export default class {
   @action
   setMsg = v => this._msg = v;
 
+
+  findScheduleChatList = () => {
+    this.setScheduleChatList([
+      {
+        chatImg: '/img/markus-winkler-1lk5f_x0_eE-unsplash.jpg',
+        name: 'Daniel',
+        startDate: '2021-07-25',
+        endDate: '2021-07-28',
+        introduce: 'Hi!!',
+        participant: 2,
+      },
+      {
+        chatImg: '/img/s-migaj-Yui5vfKHuzs-unsplash.jpg',
+        name: 'Matthew',
+        startDate: '2021-07-25',
+        endDate: '2021-07-28',
+        introduce: 'Hi!!',
+        participant: 2,
+      },
+      {
+        chatImg: '/img/sava-bobov-eVa2FK83K6w-unsplash.jpg',
+        name: 'Elliot Baker',
+        startDate: '2021-07-25',
+        endDate: '2021-07-28',
+        introduce: 'Hi!!',
+        participant: 4,
+      },
+      {
+        chatImg: '/img/s-migaj-Yui5vfKHuzs-unsplash.jpg',
+        name: 'Steve Sanders',
+        startDate: '2021-07-25',
+        endDate: '2021-07-28',
+        introduce: 'Hi!!',
+        participant: 2,
+      },
+      {
+        chatImg: '/img/sava-bobov-eVa2FK83K6w-unsplash.jpg',
+        name: 'Molly Thomas',
+        startDate: '2021-07-25',
+        endDate: '2021-07-28',
+        introduce: 'Hi!!',
+        participant: 4,
+      },
+    ]);
+  }
 
   findChatList = () => {
     this.setChatList([
