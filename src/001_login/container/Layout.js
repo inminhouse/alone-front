@@ -4,7 +4,6 @@ import { Link, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 
 import axios from 'axios';
-// import google from 'googleapis';
 
 //ui
 import { Button, Grid, Input, Header, Image, Message, Segment } from 'semantic-ui-react';
@@ -15,42 +14,7 @@ import { view } from '@/000_shared';
 @withRouter
 export default class extends Component {
 
-  // constructor(props) {
-  //   super(props);
-  //   console.log(props);
-  // }
-
-  login = async () => {
-    
-    // axios.get('/api/oauth2/authorization/google')
-    // axios.get('/api/auth/login')
-      // .then(({data}) => console.log(data));
-
-    // await this.props.loginStore.login();
-    // console.log(this.props.history);
-    // window.open("/api/oauth2/authorization/google")
-    this.props.history.push('http://localhost:8080/oauth2/authorization/google');
-    // const {google} = require('googleapis');
-    // const oauth2Client = new google.auth.OAuth2(
-    //   "249234000259-b3s54mj0sfmeesulgr4rlok9c8dce81i.apps.googleusercontent.com",
-    //   "-CvspwINwfAY24t7K7YTwAML",
-    //   "http://localhost:3333"
-    // );
-
-    // const scopes = [
-    //   "https://www.googleapis.com/auth/poeple",
-    //   'https://www.googleapis.com/auth/calendar'
-    // ];
-
-    // const url = oauth2Client.generateAuthUrl({
-    //   // 'online' (default) or 'offline' (gets refresh_token)
-    //   access_type: 'offline',
-    
-    //   // If you only need one scope you can pass it as a string
-    //   scope: scopes
-    // });
-
-  }
+  loginHref = (pvid) => 'http://localhost:8080/oauth2/authorize/' + pvid + '?redirect_uri=http://localhost:3333/oauth2/redirect';
 
   render() {
 
@@ -68,7 +32,7 @@ export default class extends Component {
             Log-in to your account
           </Header>
           <Segment stacked>
-            <view.IconElements
+            {/* <view.IconElements
               icon="mail"
             >
               <Input 
@@ -86,23 +50,53 @@ export default class extends Component {
                 type='password'
               />
             </view.IconElements>
-            <br/>
+            <br/> */}
             {/* <Segment>
             <div className="g-signin2" data-onsuccess="onSignIn"></div>
 
             </Segment> */}
-            <Button 
+            {/* <Button 
               fluid 
               color='teal' 
               size='large'
               onClick = {this.login}
             >
               Login
-            </Button>
+            </Button> */}
+            <a
+              href={this.loginHref('naver')}
+            >
+              <img
+                src="/img/naver/en/btnG_official.png"
+                style={{width: "100%"}}
+              />
+            </a>
+            <a
+              href={this.loginHref('kakao')}
+            >
+              <img
+                src="/img/kakao/en/kakao_login_large_narrow.png"
+                style={{width: "100%"}}
+              />
+            </a>
+            <a
+              href={this.loginHref('google')}
+            >
+              <img
+                src="/img/google/2x/btn_google_signin_light_normal_web@2x.png"
+                style={{width: "100%"}}
+              />
+            </a>
+            {/* <a
+              className="ui teal large fluid button"
+              href={'http://localhost:8080/oauth2/authorize/facebook?redirect_uri=' + 'http://localhost:3333/oauth2/redirect'}
+            >
+              Login
+            </a> */}
           </Segment>
-          <Message>
+          {/* <Message>
             New to us? <Link to='/signUp'>Sign Up</Link>
-          </Message>
+          </Message> */}
         </Grid.Column>
       </Grid>
     )
