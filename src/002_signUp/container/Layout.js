@@ -10,9 +10,16 @@ import { view } from '@/000_shared';
 @inject('signUpStore')
 @observer
 export default class extends Component {
+
+  componentDidMount() {
+    this.props.signUpStore.changeUserInfo(this.props.userInfo);
+  }
+
   render() {
 
-    const {auth} = this.props.signUpStore;
+    // console.log(this.props.userInfo)
+    const {userInfo} = this.props.signUpStore;
+
     
     // console.log(auth, view);
     return (
